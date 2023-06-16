@@ -1,0 +1,38 @@
+.navbar{
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+}
+.navbar_left{
+    display: flex;
+    justify-content: space-between;
+
+}
+.navbar_left_item{
+    float: right;
+    margin-left: 20px;
+    margin-top: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.navbar_right{
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap:30px;
+}
+
+.navbar_right_item{
+
+    margin-left: 20px;
+    margin-top: 5px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+
+}
+
