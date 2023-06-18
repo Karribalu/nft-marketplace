@@ -3,12 +3,18 @@ import "./NavBar.css";
 import fullLogo from "../../assets/full_logo.png";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { useLocation } from "react-router";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
 export interface INavBarProps {}
 
 export function NavBar(props: INavBarProps) {
   const [connected, setConnected] = React.useState(false);
   const [account, setAccount] = React.useState("0x12345654234565");
+  const [menuSelected, setMenuSelected] = React.useState(false);
   const location = useLocation();
+  const handleMenu = () => {
+    setMenuSelected(!menuSelected);
+  };
   return (
     <div>
       <div className="navbar">
@@ -53,7 +59,15 @@ export function NavBar(props: INavBarProps) {
             {connected ? "Connected" : "Connect Wallet"}
           </button>
         </div>
+        <div className="hamburger" onClick={handleMenu}>
+          {menuSelected ? (
+            <GiHamburgerMenu style={{ fontSize: "40px", color: "white" }} />
+          ) : (
+            <AiOutlineClose style={{ fontSize: "40px", color: "white" }} />
+          )}
+        </div>
       </div>
+
       <div className="connected_wallet_text">
         <span>
           {account !== ""

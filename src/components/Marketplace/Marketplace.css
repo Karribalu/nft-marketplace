@@ -45,8 +45,8 @@
 
     .tile_marketplace {
         grid-template-columns: repeat(1, 1fr);
-        height: 250px;
-        width: 250px;
+        height: 200px;
+        width: 200px;
     }
 }
 @media (max-width: 390px) {
@@ -59,8 +59,8 @@
 
     .tile_marketplace {
         grid-template-columns: repeat(1, 1fr);
-        height: 250px;
-        width: 250px;
+        height: 200px;
+        width: 170px;
         margin-left: 35%;
     }
 }
@@ -68,7 +68,7 @@
 @media (max-width: 850px) {
 .tile_marketplace {
     width: 200px;
-        height: 170px;
+    height: 170px;
 }
 }
 
