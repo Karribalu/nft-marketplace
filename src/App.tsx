@@ -1,17 +1,17 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { NavBar } from "./components/NavBar/NavBar";
+import { Route, Routes } from "react-router-dom";
+
 import { Marketplace } from "./components/Marketplace/Marketplace";
+import { NFTPage } from "./components/NFTPage/NFTPage";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Marketplace />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Marketplace />} />
+        <Route path="/" element={<NFTPage />} />
+      </Routes>
     </div>
   );
 }

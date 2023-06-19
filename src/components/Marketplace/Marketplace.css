@@ -2,14 +2,14 @@
     
     grid-gap: 20px;
     justify-content: center;
-    margin-left: 20%;
+    margin-left: 22%;
 }
 .marketplace_title{
     text-align: center;
     color: aliceblue;
     align-items: center;
     margin-top: 3rem;
-    margin-left: -15%;
+    margin-left: -19%;
     margin-bottom: 40px;
 }
 .tile_marketplace{
@@ -35,7 +35,7 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
-@media (max-width: 500px) {
+/* @media (max-width: 500px) {
     .marketplace {
         margin: 5% 10%;
     }
@@ -49,7 +49,7 @@
         height: 200px;
         width: 200px;
     }
-}
+} */
 @media (max-width: 390px) {
    
 

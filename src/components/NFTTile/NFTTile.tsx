@@ -23,7 +23,7 @@ export function NFTTile(props: INFTTileProps) {
         >
           {/* Image content goes here */}
         </div>
-        <div className="tile-overlay">
+        <div className="tile-overlay" onClick={}>
           <h2 className="tile-heading">NFT#{tokenId}</h2>
           <p className="tile-description">{description}</p>
         </div>
