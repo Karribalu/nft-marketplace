@@ -25,7 +25,7 @@ export function NavBar(props: INavBarProps) {
           </Link>
         </div>
 
-        <div className="navbar_right">
+        <div className={menuSelected ? "navbar_right_active" : "navbar_right"}>
           {location.pathname === "/marketplace" ? (
             <Link to="/marketplace" className="navbar_right_item_active">
               Marketplace
@@ -60,7 +60,7 @@ export function NavBar(props: INavBarProps) {
           </button>
         </div>
         <div className="hamburger" onClick={handleMenu}>
-          {menuSelected ? (
+          {!menuSelected ? (
             <GiHamburgerMenu style={{ fontSize: "40px", color: "white" }} />
           ) : (
             <AiOutlineClose style={{ fontSize: "40px", color: "white" }} />

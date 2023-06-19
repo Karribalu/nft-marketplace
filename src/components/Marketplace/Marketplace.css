@@ -2,14 +2,15 @@
     
     grid-gap: 20px;
     justify-content: center;
-    align-items: center;
-    margin-left: 10%;
+    margin-left: 20%;
 }
 .marketplace_title{
     text-align: center;
     color: aliceblue;
     align-items: center;
     margin-top: 3rem;
+    margin-left: -15%;
+    margin-bottom: 40px;
 }
 .tile_marketplace{
     width: 300px;
