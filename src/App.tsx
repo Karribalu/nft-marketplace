@@ -11,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Marketplace />} />
         <Route path="/" element={<NFTPage />} />
+        <Route path="/nftpage/:tokenId" element={<NFTPage />} />
       </Routes>
     </div>
   );

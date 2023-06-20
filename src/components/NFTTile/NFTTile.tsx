@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import "./NFTTile.css";
+import { Link } from "react-router-dom";
 export interface INFTTileProps {
   image: string;
   tokenId: string;
@@ -8,6 +9,9 @@ export interface INFTTileProps {
 
 export function NFTTile(props: INFTTileProps) {
   const { image, tokenId, description } = props;
+  const pathName = {
+    pathname: "/nftpage/" + tokenId,
+  };
   return (
     // <div className="nft_tile">
     //   <img className= "img" height={400} width={400} src={image} alt="nft" />
@@ -15,19 +19,21 @@ export function NFTTile(props: INFTTileProps) {
     //   <p className="nft_tile_description">{description}</p>
     // </div>
 
-    <div className="tile">
-      <div className="tile-content">
-        <div
-          className="tile-image"
-          style={{ backgroundImage: `url(${image})` }}
-        >
-          {/* Image content goes here */}
-        </div>
-        <div className="tile-overlay" onClick={}>
-          <h2 className="tile-heading">NFT#{tokenId}</h2>
-          <p className="tile-description">{description}</p>
+    <Link to={pathName}>
+      <div className="tile">
+        <div className="tile-content">
+          <div
+            className="tile-image"
+            style={{ backgroundImage: `url(${image})` }}
+          >
+            {/* Image content goes here */}
+          </div>
+          <div className="tile-overlay">
+            <h2 className="tile-heading">NFT#{tokenId}</h2>
+            <p className="tile- description">{description}</p>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
