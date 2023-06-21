@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./NavBar.css";
-import fullLogo from "../../assets/full_logo.png";
+
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { useLocation } from "react-router";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -20,18 +20,17 @@ export function NavBar(props: INavBarProps) {
       <div className="navbar">
         <div className="navbar_left">
           <Link to="/">
-            <img src={fullLogo} width={100} height={25} alt="Logo" />
             <div className="navbar_left_item">NFT Marketplace</div>
           </Link>
         </div>
 
         <div className={menuSelected ? "navbar_right_active" : "navbar_right"}>
-          {location.pathname === "/marketplace" ? (
-            <Link to="/marketplace" className="navbar_right_item_active">
+          {location.pathname === "/" ? (
+            <Link to="/" className="navbar_right_item_active">
               Marketplace
             </Link>
           ) : (
-            <Link to="/marketplace" className="navbar_right_item">
+            <Link to="/" className="navbar_right_item">
               Marketplace
             </Link>
           )}

@@ -23,7 +23,7 @@
 }
 .nft_page_right{
     width: 700px;
-    height: 500px;
+    height: 600px;
     border-radius: 10px;
     display: grid;
     gap: 20px;
@@ -33,42 +33,61 @@
     padding-right: 30px;
     box-shadow: 5px 5px 20px 2px #0100028a;
 }
-.nft_page_right_table{
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
-    border-spacing: 30px 0;
-}
-.nft_page_right_table tr td:first-child{
-  
-    font-weight: bold;
-}
-.nft_page_right_button{
-    height: 40px;
-    width: 100px;
-    
-}
 
+
+.nft_page_right_left_pane{
+    display: grid;
+    grid-template-columns: repeat(2,5fr);
+    gap:15px;
+}
+.nft_page_right_info{
+    padding-top: 26px;
+}
+.nft_page_right_button {
+    height: 60px;
+    width: 200px;
+    background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
+    border-radius: 5px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+
+    font-family: "Inter UI", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+    transition: all .5s;
+
+}
+.nft_page_right_button:hover{
+    box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+    transition-duration: .1s;
+}
 @media (max-width: 768px) {
     .nft_page{
         flex-direction: column;
     }
     .nft_page_right{
         width:450px;
-        height:350px;
+        height:600px;
         display: grid;
     }
-    .nft_page_right_table tr:last-child{
-        height: 70px;
-        
-    }
-    .nft_page_right_table tr td{
-        font-size: xx-small;
-    }
+    
     .nft_page_right_button{
         height: 50px;
         width: 200px;
-        
     }
+    .nft_page_right_left_pane{
+    display: grid;
+    grid-template-columns: repeat(2,5fr);
+ 
+}
+.nft_page_right_info{
+    width: 200px;
+    word-wrap: break-word;
+
+}
 
 }
