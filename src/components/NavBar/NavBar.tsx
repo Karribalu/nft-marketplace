@@ -44,13 +44,13 @@ export function NavBar(props: INavBarProps) {
             </Link>
           )}
 
-          {location.pathname === "/myNFT" ? (
-            <Link to="/myNFT" className="navbar_right_item_active">
-              My NFT
+          {location.pathname === "/profile" ? (
+            <Link to="/profile" className="navbar_right_item_active">
+              Profile
             </Link>
           ) : (
-            <Link to="/myNFT" className="navbar_right_item">
-              My NFT
+            <Link to="/profile" className="navbar_right_item">
+              Profile
             </Link>
           )}
 

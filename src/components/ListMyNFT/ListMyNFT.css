@@ -80,3 +80,9 @@ input[type=file]::file-selector-button{
     box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
     transition-duration: .1s;
 }
+
+.error{
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}

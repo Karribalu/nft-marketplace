@@ -9,6 +9,25 @@ export function ListMyNFT(props: IListMyNFTProps) {
     description: "",
     price: "",
   });
+  const [message, setMessage] = useState("");
+  const disableButton = () => {
+    const listNftBtn =
+      document.querySelectorAll<HTMLButtonElement>(".nft_list_btn");
+    listNftBtn[0].disabled = true;
+    listNftBtn[0].style.backgroundColor = "grey";
+    listNftBtn[0].style.cursor = "not-allowed";
+    listNftBtn[0].style.opacity = "0.5";
+  };
+  const listNft = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    const { name, description, price } = formData;
+    if (name === "" || description === "" || price === "") {
+      setMessage("Please fill all the fields");
+      disableButton();
+      return;
+    }
+  };
+
   return (
     <div>
       <NavBar />
@@ -48,7 +67,10 @@ export function ListMyNFT(props: IListMyNFTProps) {
             <input type={"file"} className="nft_form_chose" name="nft_image" />
           </div>
 
-          <button className="nft_list_btn">List NFT</button>
+          <span className="error">{message}</span>
+          <button className="nft_list_btn" onClick={(e) => listNft(e)}>
+            List NFT
+          </button>
         </form>
       </div>
     </div>
