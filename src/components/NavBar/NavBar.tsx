@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 import "./NavBar.css";
 
 import { BrowserRouter, Route, Link } from "react-router-dom";
@@ -8,13 +8,59 @@ import { AiOutlineClose } from "react-icons/ai";
 export interface INavBarProps {}
 
 export function NavBar(props: INavBarProps) {
-  const [connected, setConnected] = React.useState(false);
-  const [account, setAccount] = React.useState("0x12345654234565");
-  const [menuSelected, setMenuSelected] = React.useState(false);
+  const [connected, setConnected] = useState(false);
+  const [account, setAccount] = useState("0x");
+  const [menuSelected, setMenuSelected] = useState(false);
   const location = useLocation();
   const handleMenu = () => {
     setMenuSelected(!menuSelected);
   };
+
+  function getAddress() {
+    const ethers = require("ethers");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const addr = signer.getAddress();
+    setAccount(addr);
+  }
+  async function connectWebsite() {
+    const chainId = await window.ethereum.request({ method: "eth_chainId" });
+
+    if (chainId !== "0x5") {
+      alert("Please connect to Goerli Test Network");
+
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: "0x5" }],
+      });
+    }
+    if (window.ethereum && window.ethereum.request) {
+      await window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then(() => {
+          setConnected(true);
+          getAddress();
+          window.location.replace(location.pathname);
+        })
+        .catch((err: any) => {
+          alert(err.message);
+        });
+    }
+  }
+  useEffect(() => {
+    if (window.ethereum == undefined) return;
+
+    let val = window.ethereum.isConnected();
+    if (val) {
+      setConnected(true);
+      getAddress();
+    }
+
+    window.ethereum.on("accountsChanged", function (accounts: any) {
+      window.location.replace(location.pathname);
+    });
+  });
+
   return (
     <div>
       <div className="navbar">

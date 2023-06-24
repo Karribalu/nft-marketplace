@@ -11,6 +11,10 @@
     "@types/node": "^16.18.36",
     "@types/react": "^18.2.12",
     "@types/react-dom": "^18.2.5",
+    "axios": "^1.4.0",
+    "fs": "^0.0.1-security",
+    "os": "^0.1.2",
+    "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.9.0",
@@ -42,6 +46,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^3.0.0",

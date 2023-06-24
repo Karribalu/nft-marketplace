@@ -1,6 +1,6 @@
 import { ethers } from "hardhat";
 import hre from "hardhat";
-import fs from "fs";
+const fs = require("fs");
 async function main() {
   const [deployer] = await ethers.getSigners();
   console.log("Deploying contracts with the account:", deployer.address);
@@ -8,7 +8,9 @@ async function main() {
   const market = await ethers.deployContract("NFTMarketplace");
   await market.waitForDeployment();
   console.log("Market address:", await market.getAddress());
+
   console.log("Saving artifacts...");
+
   const data = {
     address: await market.getAddress(),
     abi: JSON.parse(market.interface.formatJson()),
