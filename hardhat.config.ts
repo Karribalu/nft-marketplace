@@ -1,8 +1,7 @@
 import { HardhatUserConfig, task } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomicfoundation/hardhat-ethers";
-import * as dotenv from "dotenv";
-dotenv.config();
+
 const fs = require("fs");
 
 task("accounts", "Prints the list of accounts", async (args, hre) => {

@@ -12,18 +12,24 @@ export function NavBar(props: INavBarProps) {
   const [account, setAccount] = useState("0x");
   const [menuSelected, setMenuSelected] = useState(false);
   const location = useLocation();
+  const ethers = require("ethers");
   const handleMenu = () => {
     setMenuSelected(!menuSelected);
   };
 
-  function getAddress() {
-    const ethers = require("ethers");
+  async function getAddress() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const addr = signer.getAddress();
+    const addr = await signer.getAddress();
+    console.log(addr);
     setAccount(addr);
   }
   async function connectWebsite() {
+    if (connected) {
+      setConnected(false);
+      setAccount("0x");
+      return;
+    }
     const chainId = await window.ethereum.request({ method: "eth_chainId" });
 
     if (chainId !== "0x5") {
@@ -59,7 +65,7 @@ export function NavBar(props: INavBarProps) {
     window.ethereum.on("accountsChanged", function (accounts: any) {
       window.location.replace(location.pathname);
     });
-  });
+  }, []);
 
   return (
     <div>
@@ -100,7 +106,7 @@ export function NavBar(props: INavBarProps) {
             </Link>
           )}
 
-          <button className="navbar_right_connect">
+          <button className="navbar_right_connect" onClick={connectWebsite}>
             {connected ? "Connected" : "Connect Wallet"}
           </button>
         </div>
