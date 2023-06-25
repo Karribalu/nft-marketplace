@@ -10,7 +10,7 @@ task("accounts", "Prints the list of accounts", async (args, hre) => {
     console.log(account.address);
   }
 });
-console.log(process.env.GOERLI_URL);
+console.log(process.env.REACT_APP_GOERLI_URL);
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
   networks: {
@@ -18,8 +18,10 @@ const config: HardhatUserConfig = {
       chainId: 1337,
     },
     goerli: {
-      url: process.env.GOERLI_URL,
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+      url: process.env.REACT_APP_REACT_APP_GOERLI_URL,
+      accounts: process.env.REACT_APP_PRIVATE_KEY
+        ? [process.env.REACT_APP_PRIVATE_KEY]
+        : [],
     },
   },
   solidity: {

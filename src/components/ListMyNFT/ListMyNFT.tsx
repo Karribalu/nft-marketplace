@@ -13,7 +13,8 @@ export function ListMyNFT(props: IListMyNFTProps) {
   });
   const ethers = require("ethers");
   const [message, setMessage] = useState("");
-  const [fileURL, setFileURL] = useState(null);
+  const [fileURL, setFileURL] = useState("");
+  const [file, setFile] = useState<File | null>(null);
   const disableButton = () => {
     const listNftBtn =
       document.querySelectorAll<HTMLButtonElement>(".nft_list_btn");
@@ -27,28 +28,42 @@ export function ListMyNFT(props: IListMyNFTProps) {
   ) => {
     e.preventDefault();
     const { name, description, price } = formData;
-    if (name === "" || description === "" || price === "") {
+    if (name === "" || description === "" || price === "" || !file) {
       setMessage("Please fill all the fields");
+      console.log(name, description, price);
       disableButton();
       return;
     }
     try {
+      const response = await uploadFileToIPFS(file);
+      console.log(response);
+      setMessage("Please wait while we list your NFT");
+      if (response.success) {
+        console.log("pinata url is ", response.pinataUrl);
+        setFileURL(response.pinataUrl);
+      } else {
+        setMessage("Error while uploading file to IPFS");
+        return;
+      }
       const metadataURI = await uploadMetadataToIPFS();
+      console.log("metadataURI is ", metadataURI);
+      if (!metadataURI) {
+        setMessage("Error while uploading metadata to IPFS");
+        return;
+      }
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
-
-      setMessage("Please wait while we list your NFT");
 
       let contract = new ethers.Contract(
         Marketplace.address,
         Marketplace.abi,
         signer
       );
-      var nftPrice = ethers.utils.parseUnits(formData, "ether");
-      let listingPrice = await contract.getListingPrice();
+      var nftPrice = ethers.utils.parseUnits(formData.price, "ether");
+      let listingPrice = await contract.getListPrice();
       listingPrice = listingPrice.toString();
 
-      const transaction = await contract.createToken(metadataURI, price, {
+      const transaction = await contract.createToken(metadataURI, nftPrice, {
         value: listingPrice,
       });
       await transaction.wait();
@@ -64,16 +79,7 @@ export function ListMyNFT(props: IListMyNFTProps) {
   const onChangeFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     const file = e.target.files[0];
-
-    try {
-      const response = await uploadFileToIPFS(file);
-      console.log(response);
-      if (response.success) {
-        setFileURL(response.pinataUrl);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    setFile(file);
   };
   const uploadMetadataToIPFS = async () => {
     const metadata = {
@@ -89,7 +95,7 @@ export function ListMyNFT(props: IListMyNFTProps) {
         console.log("pinata url is ", response.pinataUrl);
         return response.pinataUrl;
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
     }
   };
@@ -107,6 +113,9 @@ export function ListMyNFT(props: IListMyNFTProps) {
               type="text"
               name="nft_name"
               placeholder="BALA#1432"
+              onChange={(e) =>
+                updateFormData({ ...formData, name: e.target.value })
+              }
             />
           </div>
           <div className="list_nft_form_div">
@@ -117,6 +126,9 @@ export function ListMyNFT(props: IListMyNFTProps) {
               rows={5}
               id="description"
               placeholder="Bala best Collection"
+              onChange={(e) => {
+                updateFormData({ ...formData, description: e.target.value });
+              }}
             />
           </div>
           <div className="list_nft_form_div">
@@ -126,6 +138,9 @@ export function ListMyNFT(props: IListMyNFTProps) {
               type="number"
               id="nft_price"
               placeholder="Min 0.01 ETH"
+              onChange={(e) => {
+                updateFormData({ ...formData, price: e.target.value });
+              }}
             />
           </div>
           <div className="list_nft_form_div">

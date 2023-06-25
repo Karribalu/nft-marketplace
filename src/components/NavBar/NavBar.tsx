@@ -55,7 +55,7 @@ export function NavBar(props: INavBarProps) {
   }
   useEffect(() => {
     if (window.ethereum == undefined) return;
-
+    console.log(window.ethereum.isConnected());
     let val = window.ethereum.isConnected();
     if (val) {
       setConnected(true);

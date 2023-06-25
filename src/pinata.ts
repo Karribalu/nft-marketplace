@@ -1,7 +1,7 @@
-const key = process.env.PINATA_KEY;
-const secret = process.env.PINATA_SECRET;
+import axios from "axios";
+const key = process.env.REACT_APP_PINATA_KEY;
+const secret = process.env.REACT_APP_PINATA_SECRET;
 
-const axios = require("axios");
 const FormData = require("form-data");
 
 export const uploadJSONToIPFS = async (JSONBody: any) => {
@@ -24,20 +24,23 @@ export const uploadJSONToIPFS = async (JSONBody: any) => {
       return {
         success: false,
         message: error.message,
+        pinataUrl: "",
       };
     });
 };
 
 export const uploadFileToIPFS = async (file: any) => {
-  const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
+  const url = "https://api.pinata.cloud/pinning/pinFileToIPFS";
   let data = new FormData();
   data.append("file", file);
+  console.log("file");
   const metadata = JSON.stringify({
     name: "testname",
     keyvalues: {
       exampleKey: "exampleValue",
     },
   });
+  console.log(secret, key);
   data.append("pinataMetadata", metadata);
 
   const pinataOptions = JSON.stringify({
@@ -56,19 +59,22 @@ export const uploadFileToIPFS = async (file: any) => {
     },
   });
   data.append("pinataOptions", pinataOptions);
-  return axios
+
+  const response = axios
     .post(url, data, {
-      maxBodyLength: "Infinity", //this is needed to prevent axios from erroring out with large files
+      maxBodyLength: 10000, //this is needed to prevent axios from erroring out with large files
       headers: {
         "Content-Type": `multipart/form-data; boundary=${data._boundary}`,
         pinata_api_key: key,
         pinata_secret_api_key: secret,
+        Authorization: process.env.PINATA_JWT,
       },
     })
     .then(function (response: any) {
       return {
         success: true,
         pinataUrl: `https://gateway.pinata.cloud/ipfs/${response.data.IpfsHash}`,
+        message: "",
       };
     })
     .catch(function (error: any) {
@@ -76,6 +82,9 @@ export const uploadFileToIPFS = async (file: any) => {
       return {
         success: false,
         message: error.message,
+        pinataUrl: "",
       };
     });
+
+  return response;
 };
