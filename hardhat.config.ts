@@ -1,7 +1,8 @@
 import { HardhatUserConfig, task } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomicfoundation/hardhat-ethers";
-
+const dotenv = require("dotenv");
+dotenv.config();
 const fs = require("fs");
 
 task("accounts", "Prints the list of accounts", async (args, hre) => {
@@ -18,7 +19,7 @@ const config: HardhatUserConfig = {
       chainId: 1337,
     },
     goerli: {
-      url: process.env.REACT_APP_REACT_APP_GOERLI_URL,
+      url: process.env.REACT_APP_GOERLI_URL,
       accounts: process.env.REACT_APP_PRIVATE_KEY
         ? [process.env.REACT_APP_PRIVATE_KEY]
         : [],

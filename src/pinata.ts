@@ -3,7 +3,6 @@ const key = process.env.REACT_APP_PINATA_KEY;
 const secret = process.env.REACT_APP_PINATA_SECRET;
 
 const FormData = require("form-data");
-
 export const uploadJSONToIPFS = async (JSONBody: any) => {
   const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
   return axios
@@ -67,7 +66,7 @@ export const uploadFileToIPFS = async (file: any) => {
         "Content-Type": `multipart/form-data; boundary=${data._boundary}`,
         pinata_api_key: key,
         pinata_secret_api_key: secret,
-        Authorization: process.env.PINATA_JWT,
+        Authorization: process.env.REACT_APP_PINATA_JWT,
       },
     })
     .then(function (response: any) {
