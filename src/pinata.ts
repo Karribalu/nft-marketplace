@@ -32,14 +32,12 @@ export const uploadFileToIPFS = async (file: any) => {
   const url = "https://api.pinata.cloud/pinning/pinFileToIPFS";
   let data = new FormData();
   data.append("file", file);
-  console.log("file");
   const metadata = JSON.stringify({
     name: "testname",
     keyvalues: {
       exampleKey: "exampleValue",
     },
   });
-  console.log(secret, key);
   data.append("pinataMetadata", metadata);
 
   const pinataOptions = JSON.stringify({

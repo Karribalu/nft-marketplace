@@ -7,13 +7,13 @@ async function main() {
 
   const market = await ethers.deployContract("NFTMarketplace");
   await market.waitForDeployment();
-  console.log("Market address:", await market.getAddress());
+  console.log("Market address:", await market.address);
 
   console.log("Saving artifacts...");
 
   const data = {
-    address: await market.getAddress(),
-    abi: JSON.parse(market.interface.formatJson()),
+    address: await market.address,
+    abi: market.interface as any,
   };
   fs.writeFileSync("./src/Marketplace.json", JSON.stringify(data));
 }

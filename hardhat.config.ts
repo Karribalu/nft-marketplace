@@ -11,7 +11,6 @@ task("accounts", "Prints the list of accounts", async (args, hre) => {
     console.log(account.address);
   }
 });
-console.log(process.env.REACT_APP_GOERLI_URL);
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
   networks: {

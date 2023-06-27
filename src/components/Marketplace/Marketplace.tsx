@@ -9,8 +9,6 @@ import "./Marketplace.css";
 import marketplace from "../../Marketplace.json";
 import axios from "axios";
 export interface IMarketplaceProps {}
-const Web3 = require("web3");
-const Contract = require("web3-eth-contract");
 export function Marketplace(props: IMarketplaceProps) {
   const [data, setData] = useState([
     {
@@ -66,15 +64,11 @@ export function Marketplace(props: IMarketplaceProps) {
     const ethers = require("ethers");
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    // const contract = new ethers.Contract(
-    //   marketplace.address,
-    //   marketplace.abi,
-    //   signer
-    // );
-    const contract = Web3.eth.Contract(
-      marketplace.abi as unknown as AbiItem[],
-      marketplace.address
-    ) as unknown as any;
+    const contract = new ethers.Contract(
+      marketplace.address,
+      marketplace.abi,
+      signer
+    );
 
     console.log(contract);
     let transaction = await contract.getAllNFTs();
